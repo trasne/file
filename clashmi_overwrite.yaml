@@ -318,6 +318,132 @@ rule-providers:
     format: yaml
     type: http
 
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
+    name: 🇭🇰 香港节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:港|HK|hk|Hong ?Kong|hongkong|深港)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
+    name: 🇼🇸 台湾节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5x)(?=.*(?:台|新北|彰化|TW|Taiwan)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
+    name: 🇺🇸 美国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png
+    name: 🇯🇵 日本节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png
+    name: 🇸🇬 新加坡节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:新加坡|坡|狮城|SG|Singapore)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png
+    name: 🇰🇷 韩国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:KR|Korea|KOR|首尔|韩|韓)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png
+    name: 🇬🇧 英国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:英国|Britain|United Kingdom|England|伦敦)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IN.png
+    name: 🇮🇳 印度节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*0\.5)(?=.*(?:印度|IN)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
+    name: 🇭🇰 香港IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (?i)(?=.*IEPL)(?=.*(?:港|HK|Hong|深港)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
+    name: 🇼🇸 台湾IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (?i)(?=.*IEPL)(?=.*(?:台|TW|Taiwan|彰化|新北)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
+    name: 🇺🇸 美国IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (?i)(?=.*IEPL)(?=.*(?:美|US|United States|UnitedStates)).*$
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IEPL.png
+    name: ⚡ 全部IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (?i)IEPL
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Half.png
+    name: ⚡ 0.5倍
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: (0\.5倍|0.5x|半速|half)
+    include-all: true
+
+  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
+    name: 🌐 其他地区
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    filter: ^(?!.*(印度|IN|港|HK|hk|Hong Kong|HongKong|hongkong|深港|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵|新加坡|坡|狮城|SG|Singapore|台|新北|彰化|TW|Taiwan|KR|Korea|KOR|首尔|韩|韓|加拿大|Canada|渥太华|温哥华|卡尔加里|英国|Britain|United Kingdom|England|伦敦|法国|France|巴黎|德国|Germany|柏林|法兰克福|荷兰|Netherlands|阿姆斯特丹|土耳其|Turkey|Türkiye)).*$
+    include-all: true
+
 proxy-groups:
   # 核心分组
   - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png
@@ -912,131 +1038,7 @@ proxy-groups:
       - 🐟 遵循规则
       - 🎯 全球直连
 
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
-    name: 🇭🇰 香港节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:港|HK|hk|Hong ?Kong|hongkong|深港)).*$
-    include-all: true
 
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
-    name: 🇼🇸 台湾节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5x)(?=.*(?:台|新北|彰化|TW|Taiwan)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
-    name: 🇺🇸 美国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png
-    name: 🇯🇵 日本节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png
-    name: 🇸🇬 新加坡节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:新加坡|坡|狮城|SG|Singapore)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png
-    name: 🇰🇷 韩国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:KR|Korea|KOR|首尔|韩|韓)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png
-    name: 🇬🇧 英国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:英国|Britain|United Kingdom|England|伦敦)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IN.png
-    name: 🇮🇳 印度节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:印度|IN)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
-    name: 🇭🇰 香港IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:港|HK|Hong|深港)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
-    name: 🇼🇸 台湾IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:台|TW|Taiwan|彰化|新北)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
-    name: 🇺🇸 美国IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:美|US|United States|UnitedStates)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IEPL.png
-    name: ⚡ 全部IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)IEPL
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Half.png
-    name: ⚡ 0.5倍
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (0\.5倍|0.5x|半速|half)
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
-    name: 🌐 其他地区
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*(印度|IN|港|HK|hk|Hong Kong|HongKong|hongkong|深港|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵|新加坡|坡|狮城|SG|Singapore|台|新北|彰化|TW|Taiwan|KR|Korea|KOR|首尔|韩|韓|加拿大|Canada|渥太华|温哥华|卡尔加里|英国|Britain|United Kingdom|England|伦敦|法国|France|巴黎|德国|Germany|柏林|法兰克福|荷兰|Netherlands|阿姆斯特丹|土耳其|Turkey|Türkiye)).*$
-    include-all: true
 
   - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Other.png
     name: 🐟 遵循规则
