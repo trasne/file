@@ -1,1100 +1,532 @@
-rule-providers:
-  # 基础直连规则
-  private_geosite:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml
-    path: ./ruleset/private_geosite.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  private_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.yaml
-    path: ./ruleset/private_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  custom_direct_domain:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml
-    path: ./ruleset/custom_direct_domain.yaml
-    behavior: domain
-    interval: 28800
-    format: yaml
-    type: http
-  custom_direct_classical_ip:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml
-    path: ./ruleset/custom_direct_classical_ip.yaml
-    behavior: classical
-    interval: 28800
-    format: yaml
-    type: http
-  google_cn:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google-cn.yaml
-    path: ./ruleset/google_cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_games_cn:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-games@cn.yaml
-    path: ./ruleset/category_games_cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  steam_cdn_classical:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Classical.yaml
-    path: ./ruleset/steam_cdn_classical.yaml
-    behavior: classical
-    interval: 28800
-    format: yaml
-    type: http
-  category_game_platforms_download:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-game-platforms-download.yaml
-    path: ./ruleset/category_game_platforms_download.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_public_tracker:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-public-tracker.yaml
-    path: ./ruleset/category_public_tracker.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
+# 不要随意改变关键字，否则会导致出错
+# acl4SSR规则
 
-  # 代理规则
-  custom_proxy_domain:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml
-    path: ./ruleset/custom_proxy_domain.yaml
-    behavior: domain
-    interval: 28800
-    format: yaml
-    type: http
-  custom_proxy_classical_ip:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml
-    path: ./ruleset/custom_proxy_classical_ip.yaml
-    behavior: classical
-    interval: 28800
-    format: yaml
-    type: http
-  category_communication:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-communication.yaml
-    path: ./ruleset/category_communication.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_social_media_no_cn:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-social-media-!cn.yaml
-    path: ./ruleset/category_social_media_no_cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  openai:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/openai.yaml
-    path: ./ruleset/openai.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  bing:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/bing.yaml
-    path: ./ruleset/bing.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_ai_no_cn:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-!cn.yaml
-    path: ./ruleset/category_ai_no_cn.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  github:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.yaml
-    path: ./ruleset/github.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_speedtest:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-speedtest.yaml
-    path: ./ruleset/category_speedtest.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  steam:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/steam.yaml
-    path: ./ruleset/steam.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  youtube:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.yaml
-    path: ./ruleset/youtube.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  apple_tvplus:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple-tvplus.yaml
-    path: ./ruleset/apple_tvplus.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  apple:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.yaml
-    path: ./ruleset/apple.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  microsoft:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.yaml
-    path: ./ruleset/microsoft.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  googlefcm:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/googlefcm.yaml
-    path: ./ruleset/googlefcm.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  google:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.yaml
-    path: ./ruleset/google.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  tiktok:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/tiktok.yaml
-    path: ./ruleset/tiktok.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  netflix:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/netflix.yaml
-    path: ./ruleset/netflix.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  disney:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/disney.yaml
-    path: ./ruleset/disney.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  hbo:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/hbo.yaml
-    path: ./ruleset/hbo.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  primevideo:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/primevideo.yaml
-    path: ./ruleset/primevideo.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_emby:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-emby.yaml
-    path: ./ruleset/category_emby.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  spotify:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/spotify.yaml
-    path: ./ruleset/spotify.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  bahamut:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/bahamut.yaml
-    path: ./ruleset/bahamut.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_games:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-games.yaml
-    path: ./ruleset/category_games.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_entertainment:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-entertainment.yaml
-    path: ./ruleset/category_entertainment.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  category_ecommerce:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ecommerce.yaml
-    path: ./ruleset/category_ecommerce.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  gfw:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/gfw.yaml
-    path: ./ruleset/gfw.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  telegram_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.yaml
-    path: ./ruleset/telegram_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  twitter_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.yaml
-    path: ./ruleset/twitter_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  facebook_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/facebook.yaml
-    path: ./ruleset/facebook_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  google_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.yaml
-    path: ./ruleset/google_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  netflix_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/netflix.yaml
-    path: ./ruleset/netflix_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  cn_geosite:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.yaml
-    path: ./ruleset/cn_geosite.yaml
-    behavior: domain
-    interval: 86400
-    format: yaml
-    type: http
-  cn_geoip:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.yaml
-    path: ./ruleset/cn_geoip.yaml
-    behavior: ipcidr
-    interval: 86400
-    format: yaml
-    type: http
-  custom_port_direct:
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml
-    path: ./ruleset/custom_port_direct.yaml
-    behavior: classical
-    interval: 28800
-    format: yaml
-    type: http
+# 去广告：支持
+# 自动测速：支持
+# 微软分流：支持
+# 苹果分流：支持
+# 增强中国IP段：支持
+# 增强国外GFW：支持
+# 增加Tiktok规则默认美国节点
+#制作日期：2024-11-21
+#更新日期：2023-03-19
+
 
 proxy-groups:
-  
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
-    name: 🇭🇰 香港节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:港|HK|hk|Hong ?Kong|hongkong|深港)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
-    name: 🇼🇸 台湾节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5x)(?=.*(?:台|新北|彰化|TW|Taiwan)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
-    name: 🇺🇸 美国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png
-    name: 🇯🇵 日本节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png
-    name: 🇸🇬 新加坡节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:新加坡|坡|狮城|SG|Singapore)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png
-    name: 🇰🇷 韩国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:KR|Korea|KOR|首尔|韩|韓)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png
-    name: 🇬🇧 英国节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:英国|Britain|United Kingdom|England|伦敦)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IN.png
-    name: 🇮🇳 印度节点
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*0\.5)(?=.*(?:印度|IN)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png
-    name: 🇭🇰 香港IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:港|HK|Hong|深港)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png
-    name: 🇼🇸 台湾IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:台|TW|Taiwan|彰化|新北)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png
-    name: 🇺🇸 美国IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)(?=.*IEPL)(?=.*(?:美|US|United States|UnitedStates)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/IEPL.png
-    name: ⚡ 全部IEPL
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (?i)IEPL
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Half.png
-    name: ⚡ 0.5倍
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: (0\.5倍|0.5x|半速|half)
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png
-    name: 🌐 其他地区
-    type: url-test
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    filter: ^(?!.*(印度|IN|港|HK|hk|Hong Kong|HongKong|hongkong|深港|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵|新加坡|坡|狮城|SG|Singapore|台|新北|彰化|TW|Taiwan|KR|Korea|KOR|首尔|韩|韓|加拿大|Canada|渥太华|温哥华|卡尔加里|英国|Britain|United Kingdom|England|伦敦|法国|France|巴黎|德国|Germany|柏林|法兰克福|荷兰|Netherlands|阿姆斯特丹|土耳其|Turkey|Türkiye)).*$
-    include-all: true
-  
-  # 核心分组
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png
-    name: 🚀 手动选择
+  - name: 🚀 节点选择
     type: select
     proxies:
       - ♻️ 自动选择
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
+      - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Urltest.png
-    name: ♻️ 自动选择
+      - 🚀 手动切换
+      - DIRECT
+  - name: 🚀 手动切换
+    include-all: true
+    type: select
+  - name: ♻️ 自动选择
     type: url-test
-    url: https://www.gstatic.com/generate_204
+    include-all: true
     interval: 300
     tolerance: 50
-    filter: ^(?!.*(?:0\.5|half|半速)).*$
-    include-all: true
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Direct.png
-    name: 🎯 全球直连
+  - name: 📲 电报消息
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+      - DIRECT
+  - name: 💬 OpenAi
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+      - DIRECT
+  - name: 📹 油管视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+      - DIRECT
+  - name: 🎥 奈飞视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🎥 奈飞节点
+      - 🇸🇬 狮城节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+      - DIRECT
+  - name: 🎥 Tiktok
+    type: select
+    proxies:
+      - 🇺🇲 美国节点
+  - name: 📺 巴哈姆特
+    type: select
+    proxies:
+      - 🇨🇳 台湾节点
+      - 🚀 节点选择
+      - 🚀 手动切换
+      - DIRECT
+  - name: 📺 哔哩哔哩
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇨🇳 台湾节点
+      - 🇭🇰 香港节点
+  - name: 🌍 国外媒体
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+      - DIRECT
+  - name: 🌏 国内媒体
     type: select
     proxies:
       - DIRECT
-
-  # 功能分组
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png
-    name: 💬 即时通讯
-    type: select
-    proxies:
-      - ♻️ 自动选择
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Social.png
-    name: 🌐 社交媒体
+      - 🚀 手动切换
+  - name: 📢 谷歌FCM
     type: select
     proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/GitHub.png
-    name: 🚀 GitHub
+      - 🚀 手动切换
+  - name: Ⓜ️ 微软Bing
     type: select
     proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/OpenAI.png
-    name: 🤖 ChatGPT
+      - 🚀 手动切换
+  - name: Ⓜ️ 微软云盘
     type: select
     proxies:
-      - 🇼🇸 台湾节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
+      - DIRECT
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Copilot.png
-    name: 🤖 Copilot
-    type: select
-    proxies:
-      - 🇺🇸 美国IEPL
-      - 🇺🇸 美国节点
-      - 🇼🇸 台湾节点
-      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/AI.png
-    name: 🤖 AI服务
+      - 🚀 手动切换
+  - name: Ⓜ️ 微软服务
     type: select
     proxies:
-      - 🇼🇸 台湾节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
+      - 🚀 节点选择
+      - DIRECT
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/TikTok.png
-    name: 🎶 TikTok
-    type: select
-    proxies:
-      - 🇺🇸 美国IEPL
-      - 🇺🇸 美国节点
-      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/YouTube.png
-    name: 📹 YouTube
+      - 🚀 手动切换
+  - name: 🍎 苹果服务
     type: select
     proxies:
-      - 🇭🇰 香港IEPL
+      - DIRECT
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Netflix.png
-    name: 🎥 Netflix
+      - 🚀 手动切换
+  - name: 🎮 游戏平台
     type: select
     proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
+      - 🚀 手动切换
+  - name: 🎶 网易音乐
+    type: select
+    include-all: true
+    filter: (?i)网易|音乐|NetEase|Music
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
       - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Disney.png
-    name: 🎥 DisneyPlus
+  - name: 🎯 全球直连
     type: select
     proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - ♻️ 自动选择
+  - name: 🛑 广告拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: 🍃 应用净化
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - DIRECT
       - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
       - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
+      - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/HBO.png
-    name: 🎥 HBO
+      - 🚀 手动切换
+  - name: 🇭🇰 香港节点
+    include-all: true
+    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🇯🇵 日本节点
+    include-all: true
+    filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🇺🇲 美国节点
+    include-all: true
+    filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🇨🇳 台湾节点
+    include-all: true
+    filter: (?i)台|新北|彰化|TW|Taiwan
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🇸🇬 狮城节点
+    include-all: true
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🇰🇷 韩国节点
+    include-all: true
+    filter: (?i)KR|Korea|KOR|首尔|韩|韓
+    type: url-test
+    interval: 300
+    tolerance: 50
+  - name: 🎥 奈飞节点
+    include-all: true
+    filter: (?i)NF|奈飞|解锁|Netflix|NETFLIX|Media
     type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
 
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/PrimeVideo.png
-    name: 🎥 PrimeVideo
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
+rule-providers:
+  LocalAreaNetwork:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+    path: ./ruleset/LocalAreaNetwork.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  UnBan:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+    path: ./ruleset/UnBan.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  BanAD:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+    path: ./ruleset/BanAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  BanProgramAD:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+    path: ./ruleset/BanProgramAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  GoogleFCM:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/GoogleFCM.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  GoogleCN:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+    path: ./ruleset/GoogleCN.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  SteamCN:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+    path: ./ruleset/SteamCN.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Bing:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list
+    path: ./ruleset/Bing.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  OneDrive:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+    path: ./ruleset/OneDrive.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Microsoft:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+    path: ./ruleset/Microsoft.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Apple:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+    path: ./ruleset/Apple.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Telegram:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+    path: ./ruleset/Telegram.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  OpenAi:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+    path: ./ruleset/OpenAi.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  NetEaseMusic:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
+    path: ./ruleset/NetEaseMusic.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Epic:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
+    path: ./ruleset/Epic.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Origin:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list
+    path: ./ruleset/Origin.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Sony:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+    path: ./ruleset/Sony.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Steam:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
+    path: ./ruleset/Steam.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Nintendo:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list
+    path: ./ruleset/Nintendo.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  YouTube:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    path: ./ruleset/YouTube.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Netflix:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+    path: ./ruleset/Netflix.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
 
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/AppleTV.png
-    name: 🎥 AppleTV+
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
+  Tiktok:
+    url: https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
+    path: ./ruleset/tiktok.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
 
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Emby.png
-    name: 🎥 Emby
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Spotify.png
-    name: 🎻 Spotify
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Bahamut.png
-    name: 📺 Bahamut
-    type: select
-    proxies:
-      - 🇼🇸 台湾节点
-      - 🚀 手动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Entertainment.png
-    name: 🌎 国外媒体
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Shop.png
-    name: 🛒 国外电商
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/FCM.png
-    name: 📢 谷歌FCM
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Google.png
-    name: 🇬 谷歌服务
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Apple.png
-    name: 🍎 苹果服务
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Microsoft.png
-    name: Ⓜ️ 微软服务
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Game.png
-    name: 🎮 游戏平台
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Steam.png
-    name: 🎮 Steam
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/SpeedTest.png
-    name: 🚀 测速工具
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 全部IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Other.png
-    name: 🐟 漏网之鱼
-    type: select
-    proxies:
-      - 🇭🇰 香港节点
-      - 🇺🇸 美国节点
-      - 🇯🇵 日本节点
-      - 🇸🇬 新加坡节点
-      - 🇼🇸 台湾节点
-      - 🇰🇷 韩国节点
-      - 🇬🇧 英国节点
-      - 🇮🇳 印度节点
-      - 🇭🇰 香港IEPL
-      - 🇼🇸 台湾IEPL
-      - ⚡ 全部IEPL
-      - 🇺🇸 美国IEPL
-      - ⚡ 0.5倍
-      - 🌐 其他地区
-      - 🚀 手动选择
-      - ♻️ 自动选择
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Port.png
-    name: 🔀 非标端口
-    type: select
-    proxies:
-      - 🐟 遵循规则
-      - 🎯 全球直连
-
-  - icon: https://testingcf.jsdelivr.net/gh/Orz-3/mini@master/Color/Other.png
-    name: 🐟 遵循规则
-    type: select
-    proxies:
-      - 🐟 漏网之鱼
+  Bahamut:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list
+    path: ./ruleset/Bahamut.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  BilibiliHMT:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
+    path: ./ruleset/BilibiliHMT.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Bilibili:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
+    path: ./ruleset/Bilibili.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ChinaMedia:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
+    path: ./ruleset/ChinaMedia.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ProxyMedia:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+    path: ./ruleset/ProxyMedia.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ProxyGFWlist:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+    path: ./ruleset/ProxyGFWlist.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ChinaDomain:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+    path: ./ruleset/ChinaDomain.list
+    behavior: domain
+    interval: 86400
+    format: text
+    type: http
+  ChinaCompanyIp:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+    path: ./ruleset/ChinaCompanyIp.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+  Download:
+    url: https://ghfast.top/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+    path: ./ruleset/Download.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
 
 rules:
-  # 直连规则
-  - RULE-SET,private_geosite,🎯 全球直连
-  - RULE-SET,private_geoip,🎯 全球直连
-  - RULE-SET,custom_direct_domain,🎯 全球直连
-  - RULE-SET,custom_direct_classical_ip,🎯 全球直连
-  - RULE-SET,google_cn,🎯 全球直连
-  - RULE-SET,category_games_cn,🎯 全球直连
-  - RULE-SET,steam_cdn_classical,🎯 全球直连
-  - RULE-SET,category_game_platforms_download,🎯 全球直连
-  - RULE-SET,category_public_tracker,🎯 全球直连
-
-  # 代理规则
-  - RULE-SET,custom_proxy_domain,🚀 手动选择
-  - RULE-SET,custom_proxy_classical_ip,🚀 手动选择
-  - RULE-SET,category_communication,💬 即时通讯
-  - RULE-SET,category_social_media_no_cn,🌐 社交媒体
-  - RULE-SET,openai,🤖 ChatGPT
-  - RULE-SET,bing,🤖 Copilot
-  - RULE-SET,category_ai_no_cn,🤖 AI服务
-  - RULE-SET,github,🚀 GitHub
-  - RULE-SET,category_speedtest,🚀 测速工具
-  - RULE-SET,steam,🎮 Steam
-  - RULE-SET,youtube,📹 YouTube
-  - RULE-SET,apple_tvplus,🎥 AppleTV+
-  - RULE-SET,apple,🍎 苹果服务
-  - RULE-SET,microsoft,Ⓜ️ 微软服务
-  - RULE-SET,googlefcm,📢 谷歌FCM
-  - RULE-SET,google,🇬 谷歌服务
-  - RULE-SET,tiktok,🎶 TikTok
-  - RULE-SET,netflix,🎥 Netflix
-  - RULE-SET,disney,🎥 DisneyPlus
-  - RULE-SET,hbo,🎥 HBO
-  - RULE-SET,primevideo,🎥 PrimeVideo
-  - RULE-SET,category_emby,🎥 Emby
-  - RULE-SET,spotify,🎻 Spotify
-  - RULE-SET,bahamut,📺 Bahamut
-  - RULE-SET,category_games,🎮 游戏平台
-  - RULE-SET,category_entertainment,🌎 国外媒体
-  - RULE-SET,category_ecommerce,🛒 国外电商
-  - RULE-SET,gfw,🚀 手动选择
-  - RULE-SET,telegram_geoip,💬 即时通讯
-  - RULE-SET,twitter_geoip,🌐 社交媒体
-  - RULE-SET,facebook_geoip,🌐 社交媒体
-  - RULE-SET,google_geoip,🇬 谷歌服务
-  - RULE-SET,netflix_geoip,🎥 Netflix
-  - RULE-SET,cn_geosite,🎯 全球直连
-  - RULE-SET,cn_geoip,🎯 全球直连
-  - RULE-SET,custom_port_direct,🔀 非标端口
-
-  # 兜底规则
-  - MATCH,🐟 漏网之鱼
+  - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
+  - "RULE-SET,UnBan,🎯 全球直连"
+  - "RULE-SET,BanAD,🛑 广告拦截"
+  - "RULE-SET,BanProgramAD,🍃 应用净化"
+  - "RULE-SET,GoogleFCM,📢 谷歌FCM"
+  - "RULE-SET,GoogleCN,🎯 全球直连"
+  - "RULE-SET,SteamCN,🎯 全球直连"
+  - "RULE-SET,Bing,Ⓜ️ 微软Bing"
+  - "RULE-SET,OneDrive,Ⓜ️ 微软云盘"
+  - "RULE-SET,Microsoft,Ⓜ️ 微软服务"
+  - "RULE-SET,Apple,🍎 苹果服务"
+  - "RULE-SET,Telegram,📲 电报消息"
+  - "RULE-SET,OpenAi,💬 OpenAi"
+  - "RULE-SET,NetEaseMusic,🎶 网易音乐"
+  - "RULE-SET,Epic,🎮 游戏平台"
+  - "RULE-SET,Origin,🎮 游戏平台"
+  - "RULE-SET,Sony,🎮 游戏平台"
+  - "RULE-SET,Steam,🎮 游戏平台"
+  - "RULE-SET,Nintendo,🎮 游戏平台"
+  - "RULE-SET,YouTube,📹 油管视频"
+  - "RULE-SET,Netflix,🎥 奈飞视频"
+  - "RULE-SET,Tiktok,🎥 Tiktok"
+  - "RULE-SET,Bahamut,📺 巴哈姆特"
+  - "RULE-SET,BilibiliHMT,📺 哔哩哔哩"
+  - "RULE-SET,Bilibili,📺 哔哩哔哩"
+  - "RULE-SET,ChinaMedia,🌏 国内媒体"
+  - "RULE-SET,ProxyMedia,🌍 国外媒体"
+  - "RULE-SET,ProxyGFWlist,🚀 节点选择"
+  - "RULE-SET,ChinaDomain,🎯 全球直连"
+  - "RULE-SET,ChinaCompanyIp,🎯 全球直连"
+  - "RULE-SET,Download,🎯 全球直连"
+  - "GEOIP,CN,🎯 全球直连"
+  - "MATCH,🐟 漏网之鱼"
