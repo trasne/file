@@ -1,0 +1,800 @@
+# Clash Mi 覆写配置 - 全分组防DNS泄漏模板（适配原OpenClash规则）
+# 核心规则：从上到下匹配，优先级递减
+rules:
+  # 本地地址/域名直连
+  - GEOSITE,private,🎯 全球直连
+  - GEOIP,private,no-resolve,🎯 全球直连
+  # 自定义直连规则（远程拉取）
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml,🎯 全球直连
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml,🎯 全球直连
+  # 自定义代理规则（远程拉取）
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml,🚀 手动选择
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml,🚀 手动选择
+  # 谷歌CN直连
+  - GEOSITE,google-cn,🎯 全球直连
+  # 国内游戏域名直连
+  - GEOSITE,category-games@cn,🎯 全球直连
+  # Steam下载CDN直连
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Classical.yaml,🎯 全球直连
+  # 游戏平台下载直连
+  - GEOSITE,category-game-platforms-download,🎯 全球直连
+  # BT Tracker直连
+  - GEOSITE,category-public-tracker,🎯 全球直连
+  # 即时通讯（Telegram/WhatsApp等）
+  - GEOSITE,category-communication,💬 即时通讯
+  # 社交媒体（Twitter/Facebook等）
+  - GEOSITE,category-social-media-!cn,🌐 社交媒体
+  # AI服务
+  - GEOSITE,openai,🤖 ChatGPT
+  - GEOSITE,bing,🤖 Copilot
+  - GEOSITE,category-ai-!cn,🤖 AI服务
+  # 开发者相关
+  - GEOSITE,github,🚀 GitHub
+  # 测速工具
+  - GEOSITE,category-speedtest,🚀 测速工具
+  # 平台/媒体类
+  - GEOSITE,steam,🎮 Steam
+  - GEOSITE,youtube,📹 YouTube
+  - GEOSITE,apple-tvplus,🎥 AppleTV+
+  - GEOSITE,apple,🍎 苹果服务
+  - GEOSITE,microsoft,Ⓜ️ 微软服务
+  - GEOSITE,googlefcm,📢 谷歌FCM
+  - GEOSITE,google,🇬 谷歌服务
+  - GEOSITE,tiktok,🎶 TikTok
+  - GEOSITE,netflix,🎥 Netflix
+  - GEOSITE,disney,🎥 DisneyPlus
+  - GEOSITE,hbo,🎥 HBO
+  - GEOSITE,primevideo,🎥 PrimeVideo
+  - GEOSITE,category-emby,🎥 Emby
+  - GEOSITE,spotify,🎻 Spotify
+  - GEOSITE,bahamut,📺 Bahamut
+  - GEOSITE,category-games,🎮 游戏平台
+  - GEOSITE,category-entertainment,🌎 国外媒体
+  - GEOSITE,category-ecommerce,🛒 国外电商
+  # GFW列表代理
+  - GEOSITE,gfw,🚀 手动选择
+  # IP类规则（无解析）
+  - GEOIP,telegram,no-resolve,💬 即时通讯
+  - GEOIP,twitter,no-resolve,🌐 社交媒体
+  - GEOIP,facebook,no-resolve,🌐 社交媒体
+  - GEOIP,google,no-resolve,🇬 谷歌服务
+  - GEOIP,netflix,no-resolve,🎥 Netflix
+  # 国内兜底
+  - GEOSITE,cn,🎯 全球直连
+  - GEOIP,cn,no-resolve,🎯 全球直连
+  # 非标端口直连
+  - RULE-SET,https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml,🔀 非标端口
+  # 漏网之鱼
+  - MATCH,🐟 漏网之鱼
+
+# 节点分组配置（核心，匹配上面的规则分组名）
+proxy-groups:
+  # 手动选择（核心分组）
+  - name: 🚀 手动选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+
+  # 自动选择（排除0.5倍/半速节点）
+  - name: ♻️ 自动选择
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+
+  # 即时通讯
+  - name: 💬 即时通讯
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+
+  # 社交媒体
+  - name: 🌐 社交媒体
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # GitHub
+  - name: 🚀 GitHub
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # ChatGPT
+  - name: 🤖 ChatGPT
+    type: select
+    proxies:
+      - 🇼🇸 台湾节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇭🇰 香港节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # Copilot
+  - name: 🤖 Copilot
+    type: select
+    proxies:
+      - 🇺🇸 美国IEPL
+      - 🇺🇸 美国节点
+      - 🇼🇸 台湾节点
+      - 🇭🇰 香港节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # AI服务
+  - name: 🤖 AI服务
+    type: select
+    proxies:
+      - 🇼🇸 台湾节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇭🇰 香港节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # TikTok
+  - name: 🎶 TikTok
+    type: select
+    proxies:
+      - 🇺🇸 美国IEPL
+      - 🇺🇸 美国节点
+      - 🇭🇰 香港节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # YouTube
+  - name: 📹 YouTube
+    type: select
+    proxies:
+      - 🇭🇰 香港IEPL
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # Netflix
+  - name: 🎥 Netflix
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # DisneyPlus
+  - name: 🎥 DisneyPlus
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # HBO
+  - name: 🎥 HBO
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # PrimeVideo
+  - name: 🎥 PrimeVideo
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # AppleTV+
+  - name: 🎥 AppleTV+
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # Emby
+  - name: 🎥 Emby
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # Spotify
+  - name: 🎻 Spotify
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # Bahamut
+  - name: 📺 Bahamut
+    type: select
+    proxies:
+      - 🇼🇸 台湾节点
+      - 🚀 手动选择
+      - 🎯 全球直连
+
+  # 国外媒体
+  - name: 🌎 国外媒体
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # 国外电商
+  - name: 🛒 国外电商
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # 谷歌FCM
+  - name: 📢 谷歌FCM
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # 谷歌服务
+  - name: 🇬 谷歌服务
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # 苹果服务
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # 微软服务
+  - name: Ⓜ️ 微软服务
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # 游戏平台
+  - name: 🎮 游戏平台
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # Steam
+  - name: 🎮 Steam
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # 测速工具
+  - name: 🚀 测速工具
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 全部IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+
+  # 漏网之鱼
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🇺🇸 美国节点
+      - 🇯🇵 日本节点
+      - 🇸🇬 新加坡节点
+      - 🇼🇸 台湾节点
+      - 🇰🇷 韩国节点
+      - 🇬🇧 英国节点
+      - 🇮🇳 印度节点
+      - 🇭🇰 香港IEPL
+      - 🇼🇸 台湾IEPL
+      - ⚡ 全部IEPL
+      - 🇺🇸 美国IEPL
+      - ⚡ 0.5倍
+      - 🌐 其他地区
+      - 🚀 手动选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+
+  # 非标端口
+  - name: 🔀 非标端口
+    type: select
+    proxies:
+      - 🐟 遵循规则
+      - 🎯 全球直连
+
+  # 地区节点 - 香港
+  - name: 🇭🇰 香港节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:港|HK|hk|Hong ?Kong|hongkong|深港)).*$
+
+  # 地区节点 - 台湾
+  - name: 🇼🇸 台湾节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5x)(?=.*(?:台|新北|彰化|TW|Taiwan)).*$
+
+  # 地区节点 - 美国
+  - name: 🇺🇸 美国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates)).*$
+
+  # 地区节点 - 日本
+  - name: 🇯🇵 日本节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵)).*$
+
+  # 地区节点 - 新加坡
+  - name: 🇸🇬 新加坡节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:新加坡|坡|狮城|SG|Singapore)).*$
+
+  # 地区节点 - 韩国
+  - name: 🇰🇷 韩国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:KR|Korea|KOR|首尔|韩|韓)).*$
+
+  # 地区节点 - 英国
+  - name: 🇬🇧 英国节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:英国|Britain|United Kingdom|England|伦敦)).*$
+
+  # 地区节点 - 印度
+  - name: 🇮🇳 印度节点
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*0\.5)(?=.*(?:印度|IN)).*$
+
+  # IEPL节点 - 香港
+  - name: 🇭🇰 香港IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:(?i)(?=.*IEPL)(?=.*(?:港|HK|Hong|深港)).*$
+
+  # IEPL节点 - 台湾
+  - name: 🇼🇸 台湾IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:(?i)(?=.*IEPL)(?=.*(?:台|TW|Taiwan|彰化|新北)).*$
+
+  # IEPL节点 - 美国
+  - name: 🇺🇸 美国IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:(?i)(?=.*IEPL)(?=.*(?:美|US|United States|UnitedStates)).*$
+
+  # IEPL节点 - 全部
+  - name: ⚡ 全部IEPL
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:(?i)IEPL
+
+  # 0.5倍节点
+  - name: ⚡ 0.5倍
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:(0\.5倍|0.5x|半速|half)
+
+  # 其他地区
+  - name: 🌐 其他地区
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - REGEX:^(?!.*(印度|IN|港|HK|hk|Hong Kong|HongKong|hongkong|深港|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|UnitedStates|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|JP|Japan|🇯🇵|新加坡|坡|狮城|SG|Singapore|台|新北|彰化|TW|Taiwan|KR|Korea|KOR|首尔|韩|韓|加拿大|Canada|渥太华|温哥华|卡尔加里|英国|Britain|United Kingdom|England|伦敦|法国|France|巴黎|德国|Germany|柏林|法兰克福|荷兰|Netherlands|阿姆斯特丹|土耳其|Turkey|Türkiye)).*$
+
+  # 全球直连
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+
+  # 遵循规则
+  - name: 🐟 遵循规则
+    type: select
+    proxies:
+      - 🐟 漏网之鱼
