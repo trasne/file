@@ -13,7 +13,6 @@
 
 
 proxy-groups:
-proxy-groups:
   # 核心节点选择（总控）
   - name: 🚀 节点选择
     type: select
