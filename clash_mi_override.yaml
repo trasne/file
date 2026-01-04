@@ -123,11 +123,11 @@ proxy-groups:
   - name: 📹 油管视频
     type: select
     proxies:
+      - 🇭🇰 香港IEPL
       - 🇺🇸 美国节点
       - 🇯🇵 日本节点
       - 🇭🇰 香港节点
       - 🇺🇸 美国IEPL
-      - 🇭🇰 香港IEPL
       - ⚡ 全部IEPL
       - 🇸🇬 新加坡节点
       - 🇼🇸 台湾节点
