@@ -1,3 +1,3 @@
 payload:
-  - DOMAIN,6v520.cc
-  - DOMAIN-SUFFIX,6v520.cc
+  - '*6v520*'
+
