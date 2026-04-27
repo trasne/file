@@ -1,4 +1,5 @@
 ##自定义直连网址
 ##收集byKim
 DOMAIN-SUFFIX,6v520.cc
-DOMAIN-SUFFIX,6v520.top
+DOMAIN-SUFFIX,peskfree.com
+DOMAIN-SUFFIX,pesktop.com
