@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubConverter 订阅链接生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            background-color: #f5f7fa;
+            padding-bottom: 80px; /* 为浮动保存按钮预留空间 */
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #409eff;
+            box-shadow: 0 0 0 2px rgba(64,158,255,0.1);
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #generateBtn {
+            background-color: #409eff;
+            color: white;
+        }
+        #generateBtn:hover {
+            background-color: #337ecc;
+        }
+        #copyBtn {
+            background-color: #67c23a;
+            color: white;
+        }
+        #copyBtn:hover {
+            background-color: #529b2e;
+        }
+        #resetBtn {
+            background-color: #909399;
+            color: white;
+        }
+        #resetBtn:hover {
+            background-color: #73767a;
+        }
+        #qrcodeBtn {
+            background-color: #e6a23c;
+            color: white;
+        }
+        #qrcodeBtn:hover {
+            background-color: #d39027;
+        }
+        .result-group {
+            margin-top: 30px;
+        }
+        #result {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: "Consolas", monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .qrcode-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #qrcode {
+            display: inline-block;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #qrcode.show {
+            opacity: 1;
+        }
+        .tip {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+        .success {
+            color: #67c23a;
+            animation: fade 2s ease;
+        }
+        .error {
+            color: #f56c6c;
+            animation: fade 2s ease;
+        }
+        @keyframes fade {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        /* 浮动保存按钮样式 */
+        .float-save-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #409eff;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(64,158,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        .float-save-btn:hover {
+            background-color: #337ecc;
+            transform: scale(1.05);
+        }
+        .float-save-btn .icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+        .save-toast {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 998;
+        }
+        .save-toast.show {
+            opacity: 1;
+        }
+    </style>
+    <!-- 引入QRCode.js生成二维码（备用CDN） -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>SubConverter 订阅链接生成器</h1>
+        
+        <div class="form-group">
+            <label for="subUrl">原始订阅链接</label>
+            <input type="text" id="subUrl" placeholder="请输入你的原始节点订阅链接">
+        </div>
+
+        <div class="form-group">
+            <label for="subConverterUrl">SubConverter 地址</label>
+            <input type="text" id="subConverterUrl" placeholder="格式：http://IP:端口/sub">
+        </div>
+
+        <div class="form-group">
+            <label for="configUrl">自定义模板链接</label>
+            <input type="text" id="configUrl" placeholder="留空则使用默认模板">
+        </div>
+
+        <div class="form-group">
+            <label for="ua">User-Agent</label>
+            <input type="text" id="ua" placeholder="请求的UA标识">
+        </div>
+
+        <div class="btn-group">
+            <button id="generateBtn">生成链接</button>
+            <button id="copyBtn">复制结果</button>
+            <button id="qrcodeBtn">生成二维码</button>
+            <button id="resetBtn">清空表单</button>
+        </div>
+
+        <div class="result-group">
+            <label for="result">生成结果</label>
+            <textarea id="result" readonly placeholder="点击生成链接后显示结果..."></textarea>
+            
+            <!-- 二维码展示区域 -->
+            <div class="qrcode-group">
+                <label>二维码（可扫码添加订阅）：</label>
+                <div id="qrcode"></div>
+            </div>
+
+            <div class="tip" id="tip"></div>
+        </div>
+    </div>
+
+    <!-- 浮动保存按钮 -->
+    <button class="float-save-btn" id="saveBtn" title="保存当前参数">
+        <span class="icon">💾</span>
+    </button>
+    <div class="save-toast" id="saveToast">参数保存成功！</div>
+
+    <script>
+        // 元素获取
+        const subUrlInput = document.getElementById('subUrl');
+        const subConverterUrlInput = document.getElementById('subConverterUrl');
+        const configUrlInput = document.getElementById('configUrl');
+        const uaInput = document.getElementById('ua');
+        const resultInput = document.getElementById('result');
+        const generateBtn = document.getElementById('generateBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const qrcodeBtn = document.getElementById('qrcodeBtn');
+        const tip = document.getElementById('tip');
+        const qrcodeContainer = document.getElementById('qrcode');
+        const saveBtn = document.getElementById('saveBtn');
+        const saveToast = document.getElementById('saveToast');
+        
+        // 存储生成的最终链接
+        let finalLink = '';
+        // 本地存储key
+        const STORAGE_KEY = 'subConverterParams';
+
+        // ========== 核心修复1：移除排除节点功能 ==========
+        // 已删除所有排除节点相关代码
+
+        // ========== 核心修复2：参数本地保存/加载 ==========
+        // 页面加载时恢复保存的参数
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedParams = localStorage.getItem(STORAGE_KEY);
+            if (savedParams) {
+                try {
+                    const params = JSON.parse(savedParams);
+                    subUrlInput.value = params.subUrl || '';
+                    subConverterUrlInput.value = params.subConverterUrl || 'http://192.168.70.67:25500/sub';
+                    configUrlInput.value = params.configUrl || 'https://raw.githubusercontent.com/trasne/file/refs/heads/main/ZCSSR_OpenClash_Rules_byKIM_v3.ini';
+                    uaInput.value = params.ua || 'clash';
+                } catch (e) {
+                    console.log('加载保存参数失败', e);
+                    // 设置默认值
+                    subConverterUrlInput.value = 'http://192.168.70.67:25500/sub';
+                    configUrlInput.value = 'https://raw.githubusercontent.com/trasne/file/refs/heads/main/ZCSSR_OpenClash_Rules_byKIM_v3.ini';
+                    uaInput.value = 'clash';
+                }
+            } else {
+                // 首次加载设置默认值
+                subConverterUrlInput.value = 'http://192.168.70.67:25500/sub';
+                configUrlInput.value = 'https://raw.githubusercontent.com/trasne/file/refs/heads/main/ZCSSR_OpenClash_Rules_byKIM_v3.ini';
+                uaInput.value = 'clash';
+            }
+        });
+
+        // 浮动保存按钮 - 保存所有参数
+        saveBtn.addEventListener('click', () => {
+            const params = {
+                subUrl: subUrlInput.value.trim(),
+                subConverterUrl: subConverterUrlInput.value.trim(),
+                configUrl: configUrlInput.value.trim(),
+                ua: uaInput.value.trim()
+            };
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+            
+            // 显示保存提示
+            saveToast.classList.add('show');
+            setTimeout(() => {
+                saveToast.classList.remove('show');
+            }, 1500);
+        });
+
+        // ========== 核心修复3：二维码生成（改用官方新版QRCode） ==========
+        // 生成链接
+        generateBtn.addEventListener('click', () => {
+            // 获取输入值
+            let subUrl = subUrlInput.value.trim();
+            let subConverterUrl = subConverterUrlInput.value.trim();
+            let configUrl = configUrlInput.value.trim();
+            let ua = uaInput.value.trim();
+
+            // 验证必填项
+            if (!subUrl || !subConverterUrl) {
+                tip.textContent = '原始订阅链接和SubConverter地址不能为空！';
+                tip.className = 'tip error';
+                setTimeout(() => tip.className = 'tip', 2000);
+                return;
+            }
+
+            // URL编码
+            try {
+                subUrl = encodeURIComponent(subUrl);
+                if (configUrl) configUrl = encodeURIComponent(configUrl);
+                if (ua) ua = encodeURIComponent(ua);
+            } catch (e) {
+                tip.textContent = 'URL编码失败，请检查输入内容！';
+                tip.className = 'tip error';
+                setTimeout(() => tip.className = 'tip', 2000);
+                return;
+            }
+
+            // 拼接参数
+            let params = [];
+            params.push(`target=clash`);
+            params.push(`url=${subUrl}`);
+            if (configUrl) params.push(`config=${configUrl}`);
+            if (ua) params.push(`ua=${ua}`);
+            // 固定优化参数
+            params.push(`emoji=true`);
+            params.push(`new_name=true`);
+            params.push(`insert=false`);
+            params.push(`list=false`);
+            params.push(`tfo=false`);
+
+            // 拼接最终链接
+            finalLink = `${subConverterUrl}?${params.join('&')}`;
+            resultInput.value = finalLink;
+
+            // 提示成功
+            tip.textContent = '链接生成成功！可点击生成二维码';
+            tip.className = 'tip success';
+            setTimeout(() => tip.className = 'tip', 2000);
+        });
+
+        // 生成二维码（修复版）
+        qrcodeBtn.addEventListener('click', async () => {
+            // 检查是否已生成链接
+            if (!finalLink) {
+                tip.textContent = '请先点击「生成链接」获取有效订阅链接！';
+                tip.className = 'tip error';
+                setTimeout(() => tip.className = 'tip', 2000);
+                return;
+            }
+
+            // 清空原有二维码
+            qrcodeContainer.innerHTML = '';
+            qrcodeContainer.classList.remove('show');
+
+            try {
+                // 使用新版QRCode API（更稳定）
+                const qrCodeElement = document.createElement('canvas');
+                qrcodeContainer.appendChild(qrCodeElement);
+                
+                // 生成二维码
+                await QRCode.toCanvas(qrCodeElement, finalLink, {
+                    width: 220,
+                    margin: 1,
+                    color: {
+                        dark: '#000000',
+                        light: '#ffffff'
+                    }
+                });
+
+                // 显示二维码
+                qrcodeContainer.classList.add('show');
+                tip.textContent = '二维码生成成功！';
+                tip.className = 'tip success';
+                setTimeout(() => tip.className = 'tip', 2000);
+            } catch (e) {
+                // 降级方案 - 备用生成方式
+                try {
+                    const img = document.createElement('img');
+                    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(finalLink)}`;
+                    img.alt = '订阅二维码';
+                    img.style.width = '220px';
+                    qrcodeContainer.appendChild(img);
+                    qrcodeContainer.classList.add('show');
+                    tip.textContent = '二维码生成成功（备用接口）！';
+                    tip.className = 'tip success';
+                } catch (err) {
+                    tip.textContent = '二维码生成失败：' + err.message;
+                    tip.className = 'tip error';
+                }
+                setTimeout(() => tip.className = 'tip', 2000);
+            }
+        });
+
+        // 复制结果
+        copyBtn.addEventListener('click', () => {
+            if (!finalLink) {
+                tip.textContent = '暂无可复制的内容！';
+                tip.className = 'tip error';
+                setTimeout(() => tip.className = 'tip', 2000);
+                return;
+            }
+            
+            // 兼容所有浏览器的复制方案
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(finalLink).then(() => {
+                    tip.textContent = '复制成功！';
+                    tip.className = 'tip success';
+                }).catch(() => {
+                    fallbackCopy();
+                });
+            } else {
+                fallbackCopy();
+            }
+            
+            setTimeout(() => tip.className = 'tip', 2000);
+            
+            // 降级复制方案
+            function fallbackCopy() {
+                resultInput.select();
+                resultInput.setSelectionRange(0, 99999); // 移动端兼容
+                document.execCommand('copy');
+                tip.textContent = '复制成功！';
+                tip.className = 'tip success';
+            }
+        });
+
+        // 清空表单（重置）
+        resetBtn.addEventListener('click', () => {
+            subUrlInput.value = '';
+            // 保留默认值，仅清空用户输入
+            subConverterUrlInput.value = 'http://192.168.70.67:25500/sub';
+            configUrlInput.value = 'https://raw.githubusercontent.com/trasne/file/refs/heads/main/ZCSSR_OpenClash_Rules_byKIM_v3.ini';
+            uaInput.value = 'clash';
+            resultInput.value = '';
+            finalLink = '';
+            tip.textContent = '';
+            
+            // 清空二维码
+            qrcodeContainer.innerHTML = '';
+            qrcodeContainer.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
